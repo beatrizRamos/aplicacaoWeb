@@ -19,6 +19,11 @@ public class Torta {
         this.camadasDeRecheio = camadasDeRecheio;
         this.fabricante = fabricante;
     }
+     public Torta() {
+        
+    }
+
+    
 
     public String getSabor() {
         return sabor;

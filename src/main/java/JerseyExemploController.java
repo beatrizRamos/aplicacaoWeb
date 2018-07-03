@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 
-
 import com.google.gson.Gson;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,7 +16,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -38,16 +39,48 @@ public class JerseyExemploController {
     @Path("ola")
     @Produces(MediaType.TEXT_PLAIN)
     public String olaMundo() {
-        return "Olá mundo!";
+        return "Vamos comecar!";
     }
 
-    /*@GET
-    @Path("adicionar")
+    // http://localhost:8084/application/meuwebservice/insert?sabor=chocolate&camadasDeRecheio=2&fabricante=bia
+    @POST
+    @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response adicionar(@QueryParam("nome") String nome) {
-        Pessoa pessoa = new Pessoa(nome);
+    public Response adicionar(@QueryParam("sabor") String nome,
+            @QueryParam("camadasDeRecheio") int camadasDeRecheio,
+            @QueryParam("fabricante") String fabricante) {
+        Torta torta = new Torta(nome, camadasDeRecheio, fabricante);
         Gson gson = new Gson();
-        Boolean resultado = new Boolean(this.pessoaDAO.adicionar(pessoa));
+        Boolean resultado = new Boolean(this.tortaDAO.insert(torta));
         return Response.status(Status.OK).entity(gson.toJson(resultado)).build();
-    }*/
+    }
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response delete(@QueryParam("sabor") String nome,
+            @QueryParam("camadasDeRecheio") int camadasDeRecheio,
+            @QueryParam("fabricante") String fabricante) {
+        Torta torta = new Torta(nome, camadasDeRecheio, fabricante);
+        Gson gson = new Gson();
+        Boolean resultado = new Boolean(this.tortaDAO.delete(torta));
+        return Response.status(Status.OK).entity(gson.toJson(resultado)).build();
+    }
+
+    @GET
+    @Path("get")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String get(@QueryParam("sabor") String nome,
+            @QueryParam("camadasDeRecheio") int camadasDeRecheio,
+            @QueryParam("fabricante") String fabricante) {
+        Torta torta = new Torta(nome, camadasDeRecheio, fabricante);
+        Gson gson = new Gson();
+        Torta t = new Torta();
+        t = this.tortaDAO.get(torta);
+
+        return gson.toJson(t);
+    }
+    
+
+
 }
