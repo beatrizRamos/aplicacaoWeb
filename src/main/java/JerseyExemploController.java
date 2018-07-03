@@ -42,14 +42,14 @@ public class JerseyExemploController {
         return "Vamos comecar!";
     }
 
-    // http://localhost:8084/application/meuwebservice/insert?sabor=chocolate&camadasDeRecheio=2&fabricante=bia
+    // http://localhost:8084/application/webservice/insert?sabor=chocolate&camadasDeRecheio=2&fabricante=bia
     @POST
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
     public Response adicionar(@QueryParam("sabor") String nome,
-            @QueryParam("camadasDeRecheio") int camadasDeRecheio,
+            @QueryParam("id") int id,
             @QueryParam("fabricante") String fabricante) {
-        Torta torta = new Torta(nome, camadasDeRecheio, fabricante);
+        Torta torta = new Torta(nome, id, fabricante);
         Gson gson = new Gson();
         Boolean resultado = new Boolean(this.tortaDAO.insert(torta));
         return Response.status(Status.OK).entity(gson.toJson(resultado)).build();
@@ -58,12 +58,9 @@ public class JerseyExemploController {
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response delete(@QueryParam("sabor") String nome,
-            @QueryParam("camadasDeRecheio") int camadasDeRecheio,
-            @QueryParam("fabricante") String fabricante) {
-        Torta torta = new Torta(nome, camadasDeRecheio, fabricante);
+    public Response delete(@QueryParam("id") int id) {
         Gson gson = new Gson();
-        Boolean resultado = new Boolean(this.tortaDAO.delete(torta));
+        Boolean resultado = new Boolean(this.tortaDAO.delete(id));
         return Response.status(Status.OK).entity(gson.toJson(resultado)).build();
     }
 
@@ -80,7 +77,16 @@ public class JerseyExemploController {
 
         return gson.toJson(t);
     }
-    
 
+    @GET
+    @Path("getId")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String get(@QueryParam("id") int id) {
+        Gson gson = new Gson();
+        Torta t = new Torta();
+        t = this.tortaDAO.getId(id);
+
+        return gson.toJson(t);
+    }
 
 }

@@ -22,7 +22,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/")
 public class JerseyTestApp extends Application {
 
-    @Override
+    @Override 
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> classes = new HashSet<>();
         classes.add(JerseyExemploController.class);

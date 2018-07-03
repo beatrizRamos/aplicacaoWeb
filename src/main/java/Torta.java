@@ -11,12 +11,12 @@
  */
 public class Torta {
     protected String sabor;
-    protected int camadasDeRecheio;
+    protected int id;
     protected String fabricante;
 
     public Torta(String sabor, int camadasDeRecheio, String fabricante) {
         this.sabor = sabor;
-        this.camadasDeRecheio = camadasDeRecheio;
+        this.id = camadasDeRecheio;
         this.fabricante = fabricante;
     }
      public Torta() {
@@ -33,12 +33,12 @@ public class Torta {
         this.sabor = sabor;
     }
 
-    public int getCamadasDeRecheio() {
-        return camadasDeRecheio;
+    public int getId() {
+        return id;
     }
 
-    public void setCamadasDeRecheio(int camadasDeRecheio) {
-        this.camadasDeRecheio = camadasDeRecheio;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFabricante() {

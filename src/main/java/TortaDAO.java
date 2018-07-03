@@ -23,10 +23,10 @@ public class TortaDAO {
         return this.tortas.add(torta);
     }
 
-    public boolean delete(Torta torta) {
+    public boolean delete(int id) {
         boolean tudoCerto = false;
         for (int i = 0; i < tortas.size(); i++) {
-            if (tortas.get(i).getSabor().equals(torta.getSabor()) & tortas.get(i).getFabricante().equals(torta.getFabricante()) & tortas.get(i).getCamadasDeRecheio() == torta.getCamadasDeRecheio()) {
+            if (tortas.get(i).getId() == id) {
                 tortas.remove(i);
                 tudoCerto = true;
             }
@@ -38,14 +38,39 @@ public class TortaDAO {
     public Torta get(Torta torta) {
         Torta t = new Torta("não encontrado", 0, "não encontrado");
         for (int i = 0; i < tortas.size(); i++) {
-            if (tortas.get(i).getSabor().equals(torta.getSabor()) & tortas.get(i).getFabricante().equals(torta.getFabricante()) & tortas.get(i).getCamadasDeRecheio() == torta.getCamadasDeRecheio()) {
+            if (tortas.get(i).getId() == torta.getId()) {
                 t.setSabor(tortas.get(i).getSabor());
                 t.setFabricante(tortas.get(i).getFabricante());
-                t.setCamadasDeRecheio(tortas.get(i).getCamadasDeRecheio());
+                t.setId(tortas.get(i).getId());
                 break;
             }
         }
         return t;
     }
+    public Torta getId(int id) {
+        Torta t = new Torta("não encontrado", 0, "não encontrado");
+        for (int i = 0; i < tortas.size(); i++) {
+            if (tortas.get(i).getId() == id) {
+                t.setSabor(tortas.get(i).getSabor());
+                t.setFabricante(tortas.get(i).getFabricante());
+                t.setId(tortas.get(i).getId());
+                break;
+            }
+        }
+        return t;
+    }
+    
+        public Torta update(Torta torta) {
+        
+        for (int i = 0; i < tortas.size(); i++) {
+            if (tortas.get(i).getId() == torta.getId()) {
+                tortas.get(i).setSabor(torta.getSabor());
+                tortas.get(i).setFabricante(torta.getFabricante());
+                break;
+            }
+        }
+        return torta;
+    }
+    
 
 }
