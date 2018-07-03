@@ -47,6 +47,7 @@ public class TortaDAO {
         }
         return t;
     }
+
     public Torta getId(int id) {
         Torta t = new Torta("não encontrado", 0, "não encontrado");
         for (int i = 0; i < tortas.size(); i++) {
@@ -59,9 +60,9 @@ public class TortaDAO {
         }
         return t;
     }
-    
-        public Torta update(Torta torta) {
-        
+
+    public Torta update(Torta torta) {
+
         for (int i = 0; i < tortas.size(); i++) {
             if (tortas.get(i).getId() == torta.getId()) {
                 tortas.get(i).setSabor(torta.getSabor());
@@ -71,6 +72,9 @@ public class TortaDAO {
         }
         return torta;
     }
-    
+
+    public ArrayList<Torta> listAll() {
+        return tortas;
+    }
 
 }
