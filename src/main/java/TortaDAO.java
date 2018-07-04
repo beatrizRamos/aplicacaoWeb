@@ -14,13 +14,23 @@ import sun.security.timestamp.TSRequest;
 public class TortaDAO {
 
     private ArrayList<Torta> tortas;
+    
+    private static TortaDAO instance;
+    
+    public static TortaDAO getInstance(){
+        if(instance == null)
+            instance = new TortaDAO();
+        
+        return instance;
+    }
 
-    public TortaDAO() {
+    private TortaDAO() {
         this.tortas = new ArrayList<Torta>();
     }
 
-    public boolean insert(Torta torta) {
-        return this.tortas.add(torta);
+    public Torta insert(Torta torta) {
+        this.tortas.add(torta);
+        return torta;
     }
 
     public boolean delete(int id) {

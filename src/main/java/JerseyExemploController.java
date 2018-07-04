@@ -25,10 +25,10 @@ import javax.ws.rs.core.Response.Status;
 @Path("webservice")
 public class JerseyExemploController {
 
-    static TortaDAO tortaDAO;
+    private TortaDAO tortaDAO;
 
     public JerseyExemploController() {
-        tortaDAO = new TortaDAO();
+        tortaDAO = TortaDAO.getInstance();
     }
 
     /**
@@ -48,14 +48,14 @@ public class JerseyExemploController {
     @POST
     @Path("insert")
     @Produces(MediaType.TEXT_PLAIN)
-    public String adicionar(@QueryParam("sabor") String sabor,
+    public String insert(@QueryParam("sabor") String sabor,
             @QueryParam("id") int id,
             @QueryParam("fabricante") String fabricante) {
         Torta torta = new Torta(sabor, id, fabricante);
         Gson gson = new Gson();
+
         return gson.toJson(this.tortaDAO.insert(torta));
     }
-
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
